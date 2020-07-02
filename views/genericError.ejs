@@ -1,0 +1,39 @@
+<%- include("../partials/topIndex.ejs") %>
+
+<nav class="green darken-2 sidenav-trigger" role="navigation">
+  <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">EcoBank</a>
+    <ul class="right hide-on-med-and-down">
+        <% if (user) { %>
+          <li><a href="/bank">Dashboard</a></li>
+          <li><a href="/accounts/logout">Log out from <%= user.name %></a></li>
+        <% } else { %>
+          <li><a href="/accounts/login">Login</a></li>
+          <li><a href="/accounts/register">Register</a></li>
+          <% } %>
+    </ul>
+  </div>
+</nav>
+
+<div class="section no-pad-bot" id="index-banner">
+  <div class="container">
+
+    <% if (err) {%>
+        <br><br>
+        <h3 class="center green-text">We encountered an error, sorry for any inconvenience</h3>
+        <h3 class="center green-text">Error message: "<%= err %>"</h3>
+        <br><br>
+        <div class="row center">
+            <a href="/" class="btn-large waves-effect waves-light green">Return to Home</a>
+
+            <% if (user) { %>
+              <a href="/bank" class="btn-large waves-effect waves-light green">Return to Dashboard</a>
+            <% } %>
+
+        </div>
+
+        <br><br>
+    <% } %>
+</div>
+</div>
+
+<%- include('../partials/bottomIndex.ejs') %>

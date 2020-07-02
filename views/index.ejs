@@ -1,0 +1,76 @@
+<%- include("../partials/topIndex.ejs") %>
+
+<nav class="green darken-2 sidenav-trigger show-on-med-and-up hide-on-small-and-down" role="navigation">
+    <div class="nav-wrapper container">
+        <a id="logo-container" href="/" class="brand-logo">EcoBank</a>
+        <ul class="right hide-on-med-and-down">
+            <% if (locals.user) { %>
+            <li><a href="/bank">Dashboard</a></li>
+            <li><a href="/accounts/logout">Log out from <%= user.name %></a></li>
+            <% } else { %>
+            <li><a href="/accounts/login">Login</a></li>
+            <li><a href="/accounts/register">Register</a></li>
+            <% } %>
+        </ul>
+    </div>
+</nav>
+<nav class="green darken-2 sidenav-trigger show-on-med-and-down hide-on-med-and-up" role="navigation">
+    <div class="nav-wrapper container">
+        <a id="logo-container" href="/" class="brand-logo left">EcoBank</a>
+        <ul class="right">
+            <% if (user) { %>
+            <li><a href="/bank">Dashboard</a></li>
+            <li><a href="/accounts/logout">Log out</a></li>
+            <% } else { %>
+            <li><a href="/accounts/login">Login</a></li>
+            <li><a href="/accounts/register">Register</a></li>
+            <% } %>
+        </ul>
+    </div>
+</nav>
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+        <br><br>
+        <h1 class="header center green-text">Welcome to EcoBank</h1>
+        <div class="row center">
+            <h5 class="header col s12 light">A modern eco-friendly bank, with dozens of features.</h5>
+        </div>
+        <div class="row center">
+            <a href="/accounts/register" class="btn-large waves-effect waves-light green">Get Started</a>
+        </div>
+        <br><br>
+    </div>
+</div>
+<div class="container">
+<div class="section">
+<div class="row hide-on-med-and-down">
+    <div class="col s6">
+        <div class="icon-block">
+            <h3 class="center">Speedy Transactions</h3>
+            <H5 class="center light">EcoBank's state-of-the-art back-end systems make it possible for it to make transactions, immediately and securely.</H5>
+        </div>
+    </div>
+    <div class="col s6">
+        <div class="icon-block">
+            <h3 class="center">User Experience Focused</h3>
+            <H5 class="center light">By utilizing revolutionary front-end technologies, EcoBank has a UI/UX design that appeals to the masses.</H5>
+        </div>
+    </div>
+</div>
+<div class="row show-on-med-and-down hide-on-med-and-up">
+    <div class="col s6">
+        <div class="icon-block">
+            <h5 class="center">Speedy Transactions</h5>
+            <p class="center light">EcoBank's state-of-the-art back-end systems make it possible for it to make transactions, immediately and securely.</p>
+        </div>
+    </div>
+    <div class="col s6">
+        <div class="icon-block">
+            <h5 class="center">User Experience Focused</h5>
+            <p class="center light">By utilizing revolutionary front-end technologies, EcoBank has a UI/UX design that appeals to the masses.</p>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/bottomIndex.ejs') %>
+

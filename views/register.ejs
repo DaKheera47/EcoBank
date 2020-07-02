@@ -1,0 +1,54 @@
+<%- include("../partials/topIndex.ejs") %>
+
+<nav class="green darken-2 sidenav-trigger" role="navigation">
+  <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">EcoBank</a>
+
+    <ul class="right hide-on-med-and-down">
+          <li><a href="/accounts/login">Login</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="container">
+
+    <div class="row">
+      <H3>Please Register an Eco-Bank Account</H3>
+      <% if ( typeof err != "undefined" ) {%>
+        <h5 class="red-text">Error encountered: "<%= err %>"</h5>
+      <% } %>
+    </div>
+
+    <form action="/accounts/register" method="POST">
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input type="text" name="name" required>
+          <label>Name</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input type="email" name="email" required>
+          <label>Email</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input type="password" name="password" required>
+          <label>Password</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <button class="btn btn-large waves-effect waves-light green" type="submit">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<%- include('../partials/bottomIndex.ejs') %>
