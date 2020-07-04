@@ -8,7 +8,7 @@ const   express = require('express'),
         bodyParser = require("body-parser");
 
 // Connecting to database
-mongoose.connect("mongodb://localhost/bankAppV3", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost/bankAppV3", { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Self made imports
 const auth = require("./middleware");
@@ -16,6 +16,7 @@ const pass = require("./passport-config").initialize();
 const authRoutes = require("./routes/authRoutes");
 const withdrawRoutes = require("./routes/withdrawRoutes");
 const depositRoutes = require("./routes/depositRoutes");
+const transferRoutes = require("./routes/transferRoutes");
 
 // Setting properties for express app
 app.use( bodyParser.urlencoded({ extended: true }) );
@@ -37,10 +38,11 @@ app.get('/bank', auth.checkAuthenticated, (req, res) => {
 app.use("/accounts", authRoutes);
 app.use("/user", withdrawRoutes);
 app.use("/user", depositRoutes);
+app.use("/user", transferRoutes);
 
 
 app.all('*', (req, res) => {
-    res.render("genericError", { err: "Error 404: Page not found", user: "" });
+    res.render("genericError", { err: "Error 404: Page not found" });
 });
 
 app.listen(1001, console.log("server on port 1001"));

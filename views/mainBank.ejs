@@ -4,7 +4,8 @@
     <div class="nav-wrapper container">
         <a id="logo-container" href="/" class="brand-logo">EcoBank</a>
         <ul class="right hide-on-small-and-down">
-            <% if (user) { %>
+            <% if ( typeof user != "undefined" ) { %>
+            <li><a href="/user/transfer">Transfer</a></li>
             <li><a href="/accounts/logout">Log out from <%= user.name %></a></li>
             <% } %>
         </ul>
@@ -14,8 +15,8 @@
     <div class="nav-wrapper container">
         <a id="logo-container" href="/" class="brand-logo left">EcoBank</a>
         <ul class="right">
-            <% if (user) { %>
-            <li><a href="/accounts/logout">Log out</a></li>
+            <% if ( typeof user != "undefined" ) { %>
+                <li><a href="/accounts/logout">Log out</a></li>
             <% } %>
         </ul>
     </div>
@@ -23,8 +24,8 @@
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
         <h1 class="header center green-text">Welcome, <%= user.name %></h1>
-        <% if (err) { %>
-        <h5 class="center red-text">Error encountered: "<%= err %>"</h5>
+        <% if ( err ) { %>
+            <h5 class="center red-text"><%= err %></h5>
         <% } %>
         <div class="row">
             <br><br>
@@ -62,7 +63,7 @@
                     <div class="card-content white-text center">
                         <span class="card-title">Balance</span>
                         <br>
-                        <% if (user) { %>
+                        <% if ( typeof user != "undefined" ) { %>
                         <H3>Rs. <%= user.balance %></H3>
                         <% } %>
                     </div>
@@ -73,8 +74,8 @@
                     <div class="card-content white-text center">
                         <span class="card-title">Balance</span>
                         <br>
-                        <% if (user) { %>
-                        <H3>Rs. <%= user.balance %></H3>
+                        <% if ( typeof user != "undefined" ) { %>
+                            <H3>Rs. <%= user.balance %></H3>
                         <% } %>
                     </div>
                 </div>

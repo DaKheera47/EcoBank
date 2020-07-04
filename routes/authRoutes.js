@@ -41,7 +41,7 @@ router.post('/register', auth.checkNotAuthenticated, async (req, res) => {
 					password: hashedPassword,
 					balance: 0
 				});
-				res.render('/accounts/login', { err: "", user: req.user });
+				res.redirect("/accounts/login");
 			} else {
 				res.render("register", { err: "User with that email already exists." });
 			};
@@ -55,5 +55,6 @@ router.get('/logout', (req, res) => {
 	req.logOut()
 	res.redirect('/')
 });
+
 
 module.exports = router;
