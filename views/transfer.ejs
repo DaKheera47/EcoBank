@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <!-- Compiled and minified CSS of Materialize CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<!-- 
+    <style>
+        .input-field label {
+            color: #000;
+        }
+        /* label focus color */
+        .input-field input[type=text]:focus + label {
+            color: #000;
+        }
+        /* label underline focus color */
+        .input-field input[type=text]:focus {
+            border-bottom: 1px solid #000;
+            box-shadow: 0 1px 0 0 #000;
+        }
+        /* valid color */
+        .input-field input[type=text].valid {
+            border-bottom: 1px solid #000;
+            box-shadow: 0 1px 0 0 #000;
+        }
+    </style> -->
+
+    <title>Welcome to EcoBank!</title>
+</head>
+<body>
+
+    
+
+<nav class="green darken-2 sidenav-trigger" role="navigation">
+  <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">EcoBank</a>
+    <ul class="right hide-on-med-and-down">
+        <% if ( typeof user != "undefined" ) { %>
+          <li><a href="/bank">Dashboard</a></li>
+          <li><a href="/accounts/logout">Log out from <%= user.name %></a></li>
+        <% } else { %>
+          <li><a href="/accounts/login">Login</a></li>
+          <li><a href="/accounts/register">Register</a></li>
+          <% } %>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+    <h3>Select User</h3>
+</div>
+
+<div class="container">
+    <ul class="collapsible">
+        <% if ( typeof usersArray != "undefined" ) { %>
+            <% usersArray.forEach(foundUser => { %>
+                <% if(foundUser.name !== user.name){ %>
+                    <li>
+                        <div class="collapsible-header"> <%= foundUser.name %> </div>
+                        <div class="collapsible-body">
+                            <form action="/user/transfer" method="post">
+                                <div class="input-field">
+                                    <input type="hidden" name="userID" value=<%= foundUser._id %>>
+                                    <input type="number" name="transferAmount">
+                                    <label>Transfer</label>
+                                </div>
+                                <button class="btn btn-small waves-effect waves-dark green" type="submit">Transfer to <%= foundUser.name %></button>
+                            </form>
+                        </div>
+                    </li>
+                <% } %>
+            <% }) %>
+        <% } %>
+    </ul>
+</div>
+
+    <script type="text/JavaScript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+    <!-- Compiled and minified JavaScript of Materialize CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script> M.AutoInit(); </script>
+</body>
+</html>
