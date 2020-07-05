@@ -20,10 +20,12 @@ router.post("/transfer", auth.checkAuthenticated, (req, res) => {
         if (err) {
             return res.render("mainBank", { err: err, user: req.user });
         } else if (+req.body.transferAmount && user !== undefined && user !== null){
-            console.log(user.balance)
-            user.balance = user.balance - Number(req.body.transferAmount);
+            console.log(user.balance, req.body.transferAmount)
+            user.balance = user.balance - req.body.transferAmount;
+            console.log(user.balance, req.body.transferAmount)
+            
             if (user.balance < 0){
-                return res.render("mainBank", { err: "You cannot transfer this amount." });
+                return res.render("mainBank", { success: undefined, err: "You cannot transfer this amount.", user: req.user });
             } else {
                 await user.save();
 
@@ -33,12 +35,12 @@ router.post("/transfer", auth.checkAuthenticated, (req, res) => {
                     } else if (+req.body.transferAmount && user !== undefined && user !== null){            
                         user.balance = user.balance + Number(req.body.transferAmount);
                         await user.save();
+                        return res.render("mainBank", { success: `${req.body.transferAmount} has been transfered.`, err: undefined, user: req.user });
                     }
                 });
             }
         }
     });
-    return res.redirect("/bank");
 });
 
 module.exports = router;
