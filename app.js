@@ -11,7 +11,6 @@ const MongoStore = require('connect-mongo')(session);
 const PORT = process.env.PORT || 1001;
 const MONGO_SECRET = process.env.MONGO_SECRET;
 const SESSION_SECRET = process.env.SESSION_SECRET;
-// const LOCAL_MONGO_URL = process.env.LOCAL_MONGO_URL;
 
 // Self made imports
 const auth = require("./middleware");
@@ -20,8 +19,6 @@ const authRoutes = require("./routes/authRoutes");
 const withdrawRoutes = require("./routes/withdrawRoutes");
 const depositRoutes = require("./routes/depositRoutes");
 const transferRoutes = require("./routes/transferRoutes");
-
-// mongoose.connect(LOCAL_MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Setting properties for express app
 app.use( bodyParser.urlencoded({ extended: true }) );
