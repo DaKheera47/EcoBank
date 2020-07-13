@@ -19,6 +19,8 @@ const withdrawRoutes = require("./routes/withdrawRoutes");
 const depositRoutes = require("./routes/depositRoutes");
 const transferRoutes = require("./routes/transferRoutes");
 
+mongoose.connect(MONGO_SECRET);
+
 // Setting properties for express app
 app.use( bodyParser.urlencoded({ extended: true }) );
 app.set("view engine", "ejs");
