@@ -1,204 +1,222 @@
-<%- include("../partials/topIndex.ejs") %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- FOR LARGER SCREENS -->
-<nav class="green darken-2 sidenav-trigger show-on-med-and-up hide-on-small-and-down" role="navigation">
-    <div class="nav-wrapper container">
-        <a id="logo-container" href="/" class="brand-logo left">EcoBank</a>
-        <ul class="right hide-on-small-and-down">
-            <% if ( typeof user != "undefined" ) { %>
-            <li><a href="/user/transfer">Transfer</a></li>
-            <li><a href="/accounts/logout">Log out from <%= user.name %></a></li>
-            <% } %>
-        </ul>
-    </div>
-</nav>
-<!-- FOR SMALLER SCREENS -->
-<nav class="green darken-2 sidenav-trigger show-on-med-and-down hide-on-med-and-up" role="navigation">
-    <div class="nav-wrapper container">
-        <a id="logo-container" href="/" class="brand-logo left">EcoBank</a>
-        <ul class="right">
-            <% if ( typeof user != "undefined" ) { %>
+    <!-- Compiled and minified CSS of Materialize CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <title>EcoBank - Dashboard</title>
+</head>
+<body>
+
+    <!-- FOR LARGER SCREENS -->
+    <nav class="green darken-2 sidenav-trigger show-on-med-and-up hide-on-small-and-down" role="navigation">
+        <div class="nav-wrapper container">
+            <a id="logo-container" href="/" class="brand-logo left">EcoBank</a>
+            <ul class="right hide-on-small-and-down">
+                <% if ( typeof user != "undefined" ) { %>
                 <li><a href="/user/transfer">Transfer</a></li>
-                <li><a href="/accounts/logout">Log out</a></li>
-            <% } %>
-        </ul>
-    </div>
-</nav>
-<!-- FOR SMALLER SCREENS -->
-<div class="section no-pad-bot" id="index-banner">
-    <div class="container">
-        <div class="row">
-            <!-- FOR SMALLER SCREENS -->
-            <div class="hide-on-med-and-up show-on-small-and-down">
-
-                <!-- SMALL TITLES -->
+                <li><a href="/accounts/logout">Log out from <%= user.name %></a></li>
+                <% } %>
+            </ul>
+        </div>
+    </nav>
+    <!-- FOR SMALLER SCREENS -->
+    <nav class="green darken-2 sidenav-trigger show-on-med-and-down hide-on-med-and-up" role="navigation">
+        <div class="nav-wrapper container">
+            <a id="logo-container" href="/" class="brand-logo left">EcoBank</a>
+            <ul class="right">
                 <% if ( typeof user != "undefined" ) { %>
-                    <h2 class="header center green-text">Balance: <%= user.balance %></h2>
+                    <li><a href="/user/transfer">Transfer</a></li>
+                    <li><a href="/accounts/logout">Log out</a></li>
                 <% } %>
+            </ul>
+        </div>
+    </nav>
+    <!-- FOR SMALLER SCREENS -->
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+            <div class="row">
+                <!-- FOR SMALLER SCREENS -->
+                <div class="hide-on-med-and-up show-on-small-and-down">
 
-                <% if ( messages.err ) { %>
-                    <h5 class="center red-text"><%= messages.err %></h5>
-                <% } %>
+                    <!-- SMALL TITLES -->
+                    <% if ( typeof user != "undefined" ) { %>
+                        <h2 class="header center green-text">Balance: <%= user.balance %></h2>
+                    <% } %>
 
-                <% if (messages.success) { %>
-                    <h5 class="center green-text"><%= messages.success %></h5>
-                <% } %>
+                    <h5 class="center-align green-text">Your Account No:
+                        <input class="center-align green-text" onclick="this.select();" type="text" value=<%= user._id %> readOnly>
+                    </h5>
 
-                <!-- SMALL WITHDRAW CARD -->
-                <div class="col s12 m4">
-                    <div class="card medium green darken-3">
-                        <div class="card-content white-text center">
-                            <span class="card-title">Withdraw From Your Account</span>
-                            <br>
-                            <form action="/user/withdraw" method="post">
-                                <input type="hidden" name="withdrawAmount" value=500>
-                                <button class="btn btn-small waves-effect waves-dark green" type="submit">Withdraw Rs. 500</button>
-                            </form>
-                            <br>
-                            <form action="/user/withdraw" method="post">
-                                <input type="hidden" name="withdrawAmount" value=1000>
-                                <button class="btn btn-small waves-effect waves-dark green" type="submit">Withdraw Rs. 1000</button>
-                            </form>
-                            <br>
-                            <form action="/user/withdraw" method="post">
-                                <input type="hidden" name="withdrawAmount" value=5000>
-                                <button class="btn btn-small waves-effect waves-dark green" type="submit">Withdraw Rs. 5000</button>
-                            </form>
-                            <form action="/user/withdraw" method="post">
-                                <div class="input-field">
-                                    <input class="white-text" type="text" name="withdrawAmount">
-                                    <label>Withdraw</label>
-                                </div>
-                                <button class="btn btn-small waves-effect waves-dark green" type="submit">Withdraw</button>
-                            </form>
+                    <% if ( messages.err ) { %>
+                        <h5 class="center red-text"><%= messages.err %></h5>
+                    <% } %>
+
+                    <% if (messages.success) { %>
+                        <h5 class="center green-text"><%= messages.success %></h5>
+                    <% } %>
+
+                    <!-- SMALL WITHDRAW CARD -->
+                    <div class="col s12 m4">
+                        <div class="card medium green darken-3">
+                            <div class="card-content white-text center">
+                                <span class="card-title">Withdraw From Your Account</span>
+                                <br>
+                                <form action="/user/withdraw" method="post">
+                                    <input type="hidden" name="withdrawAmount" value=500>
+                                    <button class="btn btn-small waves-effect waves-dark green" type="submit">Withdraw Rs. 500</button>
+                                </form>
+                                <br>
+                                <form action="/user/withdraw" method="post">
+                                    <input type="hidden" name="withdrawAmount" value=1000>
+                                    <button class="btn btn-small waves-effect waves-dark green" type="submit">Withdraw Rs. 1000</button>
+                                </form>
+                                <br>
+                                <form action="/user/withdraw" method="post">
+                                    <input type="hidden" name="withdrawAmount" value=5000>
+                                    <button class="btn btn-small waves-effect waves-dark green" type="submit">Withdraw Rs. 5000</button>
+                                </form>
+                                <form action="/user/withdraw" method="post">
+                                    <div class="input-field">
+                                        <input class="white-text" type="text" name="withdrawAmount">
+                                        <label>Withdraw</label>
+                                    </div>
+                                    <button class="btn btn-small waves-effect waves-dark green" type="submit">Withdraw</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- SMALL DEPOSIT CARD -->
-                <div class="col s12 m4">
-                    <div class="card medium green darken-3">
-                        <div class="card-content white-text center">
-                            <span class="card-title">Deposit To Your Account</span>
-                            <br>
-                            <form action="/user/deposit" method="post">
-                                <input type="hidden" name="depositAmount" value=500>
-                                <button class="btn btn-small waves-effect waves-dark green" type="submit">Deposit Rs. 500</button>
-                            </form>
-                            <br>
-                            <form action="/user/deposit" method="post">
-                                <input type="hidden" name="depositAmount" value=1000>
-                                <button class="btn btn-small waves-effect waves-dark green" type="submit">Deposit Rs. 1000</button>
-                            </form>
-                            <br>
-                            <form action="/user/deposit" method="post">
-                                <input type="hidden" name="depositAmount" value=5000>
-                                <button class="btn btn-small waves-effect waves-dark green" type="submit">Deposit Rs. 5000</button>
-                            </form>
-                            <form action="/user/deposit" method="post">
-                                <div class="input-field">
-                                    <input class="white-text" type="text" name="depositAmount">
-                                    <label>Deposit</label>
-                                </div>
-                                <button class="btn btn-small waves-effect waves-dark green" type="submit">Deposit</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FOR LARGER SCREENS -->
-            <div class="show-on-med-and-up hide-on-small-and-down">
-
-                <!-- LARGE TITLES -->
-                <% if ( typeof user != "undefined" ) { %>
-                    <h1 class="header center green-text">Welcome, <%= user.name %></h1>
-                <% } %>
-        
-                <% if ( messages.err ) { %>
-                    <h5 class="center red-text"><%= messages.err %></h5>
-                <% } %>
-        
-                <% if (messages.success) { %>
-                    <h5 class="center green-text"><%= messages.success %></h5>
-                <% } %>
-
-                <!-- LARGE WITHDRAW CARD -->
-                <div class="col s12 m4">
-                    <div class="card medium green darken-3">
-                        <div class="card-content white-text center">
-                            <span class="card-title">Withdraw From Your Account</span>
-                            <br>
-                            <form action="/user/withdraw" method="post">
-                                <input type="hidden" name="withdrawAmount" value=500>
-                                <button class="btn btn-small waves-effect waves-dark green" type="submit">Withdraw Rs. 500</button>
-                            </form>
-                            <br>
-                            <form action="/user/withdraw" method="post">
-                                <input type="hidden" name="withdrawAmount" value=1000>
-                                <button class="btn btn-small waves-effect waves-dark green" type="submit">Withdraw Rs. 1000</button>
-                            </form>
-                            <br>
-                            <form action="/user/withdraw" method="post">
-                                <input type="hidden" name="withdrawAmount" value=5000>
-                                <button class="btn btn-small waves-effect waves-dark green" type="submit">Withdraw Rs. 5000</button>
-                            </form>
-                            <form action="/user/withdraw" method="post">
-                                <div class="input-field">
-                                    <input class="white-text" type="text" name="withdrawAmount">
-                                    <label>Withdraw</label>
-                                </div>
-                                <button class="btn btn-small waves-effect waves-dark green" type="submit">Withdraw</button>
-                            </form>
+                    <!-- SMALL DEPOSIT CARD -->
+                    <div class="col s12 m4">
+                        <div class="card medium green darken-3">
+                            <div class="card-content white-text center">
+                                <span class="card-title">Deposit To Your Account</span>
+                                <br>
+                                <form action="/user/deposit" method="post">
+                                    <input type="hidden" name="depositAmount" value=500>
+                                    <button class="btn btn-small waves-effect waves-dark green" type="submit">Deposit Rs. 500</button>
+                                </form>
+                                <br>
+                                <form action="/user/deposit" method="post">
+                                    <input type="hidden" name="depositAmount" value=1000>
+                                    <button class="btn btn-small waves-effect waves-dark green" type="submit">Deposit Rs. 1000</button>
+                                </form>
+                                <br>
+                                <form action="/user/deposit" method="post">
+                                    <input type="hidden" name="depositAmount" value=5000>
+                                    <button class="btn btn-small waves-effect waves-dark green" type="submit">Deposit Rs. 5000</button>
+                                </form>
+                                <form action="/user/deposit" method="post">
+                                    <div class="input-field">
+                                        <input class="white-text" type="text" name="depositAmount">
+                                        <label>Deposit</label>
+                                    </div>
+                                    <button class="btn btn-small waves-effect waves-dark green" type="submit">Deposit</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- LARGE BALANCE CARD -->
-                <div class="col s12 m4">
-                    <div class="card medium green darken-3">
-                        <div class="card-content white-text center">
-                            <span class="card-title">Balance</span>
-                            <br>
-                            <% if ( typeof user != "undefined" ) { %>
-                            <H3>Rs. <%= user.balance %></H3>
-                            <% } %>
+                <!-- FOR LARGER SCREENS -->
+                <div class="show-on-med-and-up hide-on-small-and-down">
+
+                    <!-- LARGE TITLES -->
+                    <% if ( typeof user != "undefined" ) { %>
+                        <h1 class="header center green-text">Welcome, <%= user.name %></h1>
+                    <% } %>
+            
+                    <% if ( messages.err ) { %>
+                        <h5 class="center red-text"><%= messages.err %></h5>
+                    <% } %>
+            
+                    <% if (messages.success) { %>
+                        <h5 class="center green-text"><%= messages.success %></h5>
+                    <% } %>
+
+                    <!-- LARGE WITHDRAW CARD -->
+                    <div class="col s12 m4">
+                        <div class="card medium green darken-3">
+                            <div class="card-content white-text center">
+                                <span class="card-title">Withdraw From Your Account</span>
+                                <br>
+                                <form action="/user/withdraw" method="post">
+                                    <input type="hidden" name="withdrawAmount" value=500>
+                                    <button class="btn btn-small waves-effect waves-dark green" type="submit">Withdraw Rs. 500</button>
+                                </form>
+                                <br>
+                                <form action="/user/withdraw" method="post">
+                                    <input type="hidden" name="withdrawAmount" value=1000>
+                                    <button class="btn btn-small waves-effect waves-dark green" type="submit">Withdraw Rs. 1000</button>
+                                </form>
+                                <br>
+                                <form action="/user/withdraw" method="post">
+                                    <input type="hidden" name="withdrawAmount" value=5000>
+                                    <button class="btn btn-small waves-effect waves-dark green" type="submit">Withdraw Rs. 5000</button>
+                                </form>
+                                <form action="/user/withdraw" method="post">
+                                    <div class="input-field">
+                                        <input class="white-text" type="text" name="withdrawAmount">
+                                        <label>Withdraw</label>
+                                    </div>
+                                    <button class="btn btn-small waves-effect waves-dark green" type="submit">Withdraw</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- LARGE DEPOSIT CARD -->
-                <div class="col s12 m4">
-                    <div class="card medium green darken-3">
-                        <div class="card-content white-text center">
-                            <span class="card-title">Deposit To Your Account</span>
-                            <br>
-                            <form action="/user/deposit" method="post">
-                                <input type="hidden" name="depositAmount" value=500>
-                                <button class="btn btn-small waves-effect waves-dark green" type="submit">Deposit Rs. 500</button>
-                            </form>
-                            <br>
-                            <form action="/user/deposit" method="post">
-                                <input type="hidden" name="depositAmount" value=1000>
-                                <button class="btn btn-small waves-effect waves-dark green" type="submit">Deposit Rs. 1000</button>
-                            </form>
-                            <br>
-                            <form action="/user/deposit" method="post">
-                                <input type="hidden" name="depositAmount" value=5000>
-                                <button class="btn btn-small waves-effect waves-dark green" type="submit">Deposit Rs. 5000</button>
-                            </form>
-                            <form action="/user/deposit" method="post">
-                                <div class="input-field">
-                                    <input class="white-text" type="text" name="depositAmount">
-                                    <label>Deposit</label>
-                                </div>
-                                <button class="btn btn-small waves-effect waves-dark green" type="submit">Deposit</button>
-                            </form>
+                    <!-- LARGE BALANCE CARD -->
+                    <div class="col s12 m4">
+                        <div class="card medium green darken-3">
+                            <div class="card-content white-text center">
+                                <span class="card-title">Balance</span>
+                                <br>
+                                <% if ( typeof user != "undefined" ) { %>
+                                <H3>Rs. <%= user.balance %></H3>
+                                <% } %>
+                                <br><br><br>
+                                <h6>Your Account No: <input class="center-align white-text" onclick="this.select();" type="text" value=<%= user._id %> readOnly></h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LARGE DEPOSIT CARD -->
+                    <div class="col s12 m4">
+                        <div class="card medium green darken-3">
+                            <div class="card-content white-text center">
+                                <span class="card-title">Deposit To Your Account</span>
+                                <br>
+                                <form action="/user/deposit" method="post">
+                                    <input type="hidden" name="depositAmount" value=500>
+                                    <button class="btn btn-small waves-effect waves-dark green" type="submit">Deposit Rs. 500</button>
+                                </form>
+                                <br>
+                                <form action="/user/deposit" method="post">
+                                    <input type="hidden" name="depositAmount" value=1000>
+                                    <button class="btn btn-small waves-effect waves-dark green" type="submit">Deposit Rs. 1000</button>
+                                </form>
+                                <br>
+                                <form action="/user/deposit" method="post">
+                                    <input type="hidden" name="depositAmount" value=5000>
+                                    <button class="btn btn-small waves-effect waves-dark green" type="submit">Deposit Rs. 5000</button>
+                                </form>
+                                <form action="/user/deposit" method="post">
+                                    <div class="input-field">
+                                        <input class="white-text" type="text" name="depositAmount">
+                                        <label>Deposit</label>
+                                    </div>
+                                    <button class="btn btn-small waves-effect waves-dark green" type="submit">Deposit</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 <%- include('../partials/bottomIndex.ejs') %>

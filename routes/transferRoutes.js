@@ -42,8 +42,10 @@ router.post("/transfer", auth.checkAuthenticated, (req, res) => {
                     }
                 )
             }
+        } else {
+            req.flash("err", "Enter a valid value to transfer.");
+            res.redirect("/bank")
         }
-        
     })
 })
 
