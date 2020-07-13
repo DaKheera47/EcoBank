@@ -1,4 +1,5 @@
 // Imported modules
+require('dotenv').config()
 const express = require('express');
 const app = express();
 const passport = require('passport');
@@ -8,6 +9,9 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const MongoStore = require('connect-mongo')(session);
 const PORT = process.env.PORT || 1001;
+const MONGO_SECRET = process.env.MONGO_SECRET;
+const SESSION_SECRET = process.env.SESSION_SECRET;
+const LOCAL_MONGO_URL = process.env.LOCAL_MONGO_URL;
 
 // Self made imports
 const auth = require("./middleware");
@@ -17,15 +21,14 @@ const withdrawRoutes = require("./routes/withdrawRoutes");
 const depositRoutes = require("./routes/depositRoutes");
 const transferRoutes = require("./routes/transferRoutes");
 
-// Connecting to database
-mongoose.connect("mongodb+srv://DaKheera47:Ilovemamma123@ecobank.no5xl.mongodb.net/users?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(MONGO_SECRET, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Setting properties for express app
 app.use( bodyParser.urlencoded({ extended: true }) );
 app.set("view engine", "ejs");
 app.use(flash());
-app.use(session({ secret: "redditsnoo", store: new MongoStore({
-    url: "mongodb+srv://DaKheera47:Ilovemamma123@ecobank.no5xl.mongodb.net/users?retryWrites=true&w=majority",
+app.use(session({ secret: SESSION_SECRET, store: new MongoStore({
+    url: "mongodb://localhost/bankAppV3",
     useNewUrlParser: true,
     useUnifiedTopology: true
 }), saveUninitialized: false, resave: false
