@@ -18,7 +18,7 @@ router.get('/login', auth.checkNotAuthenticated, (req, res) => {
 
 router.get('/loginfailure', auth.checkNotAuthenticated, (req, res) => {
 	req.flash("err", "Please re-enter correct credentials.")
-	res.redirect('login')
+	res.redirect('/login')
 })
 
 router.post('/login',
