@@ -6,6 +6,7 @@ const flash = require('express-flash');
 const session = require('express-session');
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const MongoStore = require('connect-mongo')(session);
 
 // Self made imports
 const auth = require("./middleware");
@@ -22,7 +23,7 @@ mongoose.connect("mongodb+srv://DaKheera47:Ilovemamma123@ecobank.no5xl.mongodb.n
 app.use( bodyParser.urlencoded({ extended: true }) );
 app.set("view engine", "ejs");
 app.use(flash());
-app.use(session({ secret: "redditsnoo", resave: false, saveUninitialized: false }));
+app.use(session({ secret: "redditsnoo", store: new MongoStore, resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
