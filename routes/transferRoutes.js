@@ -13,38 +13,38 @@ router.get("/transfer", auth.checkAuthenticated, async (req, res) => {
 });
 
 router.post("/transfer", auth.checkAuthenticated, (req, res) => {
-    // req.user._id is user from whose account money is to be credited
-    // req.body.userID is user whose account money is to be added to
-
+    const transferAmount = req.body.transferAmount;
     User.findOne({ _id: req.user._id }, async (err, user) => {
-        if (err) {
-            return res.render("mainBank", { err: err, user: req.user });
-        } else if (+req.body.transferAmount && req.body.transferAmount > 0 && user !== undefined && user !== null){
-            user.balance = user.balance - req.body.transferAmount;
-            
-            if (user.balance < 0){
-                req.flash("err", "You cannot transfer this amount.")
-                return res.redirect("/bank")
+        if(err){
+            req.flash("err", err);
+            res.redirect("/bank");
+        } else if (+transferAmount && transferAmount > 0){
+            user.balance = user.balance - transferAmount;
+
+            if(user.balance < 0){
+                req.flash("err", "You cannot transfer this amount");
+                return res.redirect("/bank");
+
             } else {
                 await user.save();
 
-                await User.findOne({ _id: req.body.userID }, async (err, user) => {
-                    if (err) {
-                        req.flash("err", err)
+                User.findOne({ _id: req.body.userID }, async (err, foundUser) => {
+                    if(err){
+                        req.flash("err", err);
                         return res.redirect("/bank");
-                    } else if (+req.body.transferAmount && req.body.transferAmount > 0 && user !== undefined && user !== null){            
-                        user.balance = user.balance + Number(req.body.transferAmount);
-                        await user.save();
-                        req.flash("success", `${req.body.transferAmount} has been transfered.`)
-                        return res.redirect("/bank");
+                    } else if(foundUser){
+                            foundUser.balance = foundUser.balance + Number(transferAmount);
+                            await foundUser.save();
+    
+                            req.flash("success", `${transferAmount} has been transfered.`);
+                            return res.redirect("/bank");
+                        }
                     }
-                });
+                )
             }
-        } else {
-            req.flash("err", "You cannot transfer a negative amount.")
-            return res.redirect("/bank");
         }
-    });
-});
+        
+    })
+})
 
 module.exports = router;

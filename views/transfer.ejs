@@ -38,31 +38,19 @@
     </nav>
 
     <div class="container">
-        <h3 class="center green-text">Select User</h3>
-
-        <ul class="collapsible">
-            <% if ( typeof usersArray != "undefined" ) { %>
-                <% usersArray.forEach(foundUser => { %>
-                    <% if(foundUser.name !== user.name){ %>
-                        <li>
-                            <div class="collapsible-header"> <%= foundUser.name %> </div>
-                            <div class="collapsible-body">
-                                <form action="/user/transfer" method="post">
-                                    <div class="input-field">
-                                        <input type="hidden" name="userID" value=<%= foundUser._id %>>
-                                        <input type="number" name="transferAmount">
-                                        <label>Transfer</label>
-                                    </div>
-                                    <button class="btn btn-small waves-effect waves-dark green" type="submit">Transfer to <%= foundUser.name %></button>
-                                </form>
-                            </div>
-                        </li>
-                    <% } %>
-                <% }) %>
-            <% } %>
-        </ul>
+        <h3 class="green-text center">Enter the User ID to which you want to send</h3>
+        <form action="/user/transfer" method="post">
+            <div class="input-field">
+                <input type="text" name="userID">
+                <label>User ID</label>
+            </div>
+            <div class="input-field">
+                <input type="number" name="transferAmount">
+                <label>Transfer</label>
+            </div>
+            <button class="btn btn-small waves-effect waves-dark green" type="submit">Transfer</button>
+        </form>
     </div>
-
 
 
     <script type="text/JavaScript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
