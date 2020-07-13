@@ -20,22 +20,23 @@ router.post("/transfer", auth.checkAuthenticated, (req, res) => {
         if (err) {
             return res.render("mainBank", { err: err, user: req.user });
         } else if (+req.body.transferAmount && user !== undefined && user !== null){
-            console.log(user.balance, req.body.transferAmount)
             user.balance = user.balance - req.body.transferAmount;
-            console.log(user.balance, req.body.transferAmount)
             
             if (user.balance < 0){
-                return res.render("mainBank", { success: undefined, err: "You cannot transfer this amount.", user: req.user });
+                req.flash("err", "You cannot transfer this amount.")
+                return res.redirect("/bank")
             } else {
                 await user.save();
 
-                User.findOne({ _id: req.body.userID }, async (err, user) => {
+                await User.findOne({ _id: req.body.userID }, async (err, user) => {
                     if (err) {
-                        return res.render("mainBank", { err: err, user: req.user });
+                        req.flash("err", err)
+                        return res.redirect("/bank");
                     } else if (+req.body.transferAmount && user !== undefined && user !== null){            
                         user.balance = user.balance + Number(req.body.transferAmount);
                         await user.save();
-                        return res.render("mainBank", { success: `${req.body.transferAmount} has been transfered.`, err: undefined, user: req.user });
+                        req.flash("success", `${req.body.transferAmount} has been transfered.`)
+                        return res.redirect("/bank");
                     }
                 });
             }

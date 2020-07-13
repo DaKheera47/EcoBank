@@ -8,16 +8,17 @@ const auth = require("../middleware");
 router.post("/deposit", auth.checkAuthenticated, (req, res) => {
     User.findOne({ email: req.user.email }, async (err, user) => {
         if (err) {
-            return res.render("mainBank", { err: err, user: req.user });
+            req.flash("err", err);
+            return res.redirect("/bank");
         } else if (+req.body.depositAmount) {
             user.balance = user.balance + Number(req.body.depositAmount);
             await user.save();
             return res.redirect("/bank");
         } else {
-            return res.render("mainBank", { err: "Enter a valid value to deposit", user: req.user });
+            req.flash("err", "Enter a valid value to deposit")
+            return res.redirect("/bank");
         }
     });
 });
-
 
 module.exports = router;

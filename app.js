@@ -1,14 +1,11 @@
 // Imported modules
-const   express = require('express'),
-        app = express(),
-        passport = require('passport'),
-        flash = require('express-flash'),
-        session = require('express-session'),
-        mongoose = require("mongoose"),
-        bodyParser = require("body-parser");
-
-// Connecting to database
-mongoose.connect("mongodb://localhost/bankAppV3", { useNewUrlParser: true, useUnifiedTopology: true });
+const express = require('express');
+const app = express();
+const passport = require('passport');
+const flash = require('express-flash');
+const session = require('express-session');
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 // Self made imports
 const auth = require("./middleware");
@@ -17,6 +14,9 @@ const authRoutes = require("./routes/authRoutes");
 const withdrawRoutes = require("./routes/withdrawRoutes");
 const depositRoutes = require("./routes/depositRoutes");
 const transferRoutes = require("./routes/transferRoutes");
+
+// Connecting to database
+mongoose.connect("mongodb+srv://DaKheera47:Ilovemamma123@ecobank.no5xl.mongodb.net/users?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Setting properties for express app
 app.use( bodyParser.urlencoded({ extended: true }) );

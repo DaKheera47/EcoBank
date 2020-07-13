@@ -27,10 +27,12 @@
             <h1 class="header center green-text">Welcome, <%= user.name %></h1>
         <% } %>
 
-        <% if ( err ) { %>
-            <h5 class="center red-text"><%= err %></h5>
-        <% } else if ( typeof success != "undefined" ) { %>
-            <h5 class="center green-text"><%= success %></h5>
+        <% if ( messages.err ) { %>
+            <h5 class="center red-text"><%= messages.err %></h5>
+        <% } %>
+
+        <% if (messages.success) { %>
+            <h5 class="center green-text"><%= messages.success %></h5>
         <% } %>
 
         <div class="row">

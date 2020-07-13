@@ -17,7 +17,8 @@ router.get('/login', auth.checkNotAuthenticated, (req, res) => {
 })
 
 router.get('/loginfailure', auth.checkNotAuthenticated, (req, res) => {
-	res.render('login.ejs', { err: "Please re-enter correct credentials", user: req.user })
+	req.flash("err", "Please re-enter correct credentials.")
+	res.redirect('login')
 })
 
 router.post('/login',
@@ -43,11 +44,13 @@ router.post('/register', auth.checkNotAuthenticated, async (req, res) => {
 				});
 				res.redirect("/accounts/login");
 			} else {
-				res.render("register", { err: "User with that email already exists." });
+				req.flash("err", "User with that email already exists.")
+				res.redirect("register");
 			};
 		})
 	} catch (err) {
-		res.render("register", { err: err });
+		req.flash("err", err)
+		res.redirect("register");
 	};
 });
 

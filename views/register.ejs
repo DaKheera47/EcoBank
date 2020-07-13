@@ -13,9 +13,9 @@
   <div class="container">
 
     <div class="row">
-      <H3>Please Register an Eco-Bank Account</H3>
-      <% if ( typeof err != "undefined" ) {%>
-        <h5 class="red-text">Error encountered: "<%= err %>"</h5>
+      <H3 class="center">Please Register an Eco-Bank Account</H3>
+      <% if ( typeof messages.err != "undefined" ) {%>
+        <h5 class="center red-text"><%= messages.err %></h5>
       <% } %>
     </div>
 

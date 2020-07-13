@@ -11,13 +11,11 @@
 <div class="container">
     <div class="container">
         <div class="row">
-            <H3>Please Log In to Your Eco-Bank Account</H3>
-            <% if ( typeof err != "undefined" ) {%>
-                <h5 class="red-text">Error encountered: "<%= err %>"</h5>
+            <H3 class="center">Please Log In to Your Eco-Bank Account</H3>
+            <% if ( typeof messages.err != "undefined" ) {%>
+                <h5 class="center red-text"><%= messages.err %></h5>
             <% } %>
         </div>
-
-    
 
         <form action="/accounts/login" method="POST">
             <div class="row">
