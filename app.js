@@ -7,6 +7,7 @@ const session = require('express-session');
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const MongoStore = require('connect-mongo')(session);
+const PORT = process.env.PORT || 1001;
 
 // Self made imports
 const auth = require("./middleware");
@@ -49,4 +50,4 @@ app.all('*', (req, res) => {
     res.render("genericError", { err: "Error 404: Page not found" });
 });
 
-app.listen(1001, console.log("server on port 1001"));
+app.listen(PORT, console.log(`Server on port: ${PORT}`));
