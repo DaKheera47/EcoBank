@@ -25,7 +25,9 @@ app.use( bodyParser.urlencoded({ extended: true }) );
 app.set("view engine", "ejs");
 app.use(flash());
 app.use(session({ secret: "redditsnoo", store: new MongoStore({
-    url: "mongodb+srv://DaKheera47:Ilovemamma123@ecobank.no5xl.mongodb.net/users?retryWrites=true&w=majority"
+    url: "mongodb+srv://DaKheera47:Ilovemamma123@ecobank.no5xl.mongodb.net/users?retryWrites=true&w=majority",
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 }), saveUninitialized: false, resave: false
 }));
 app.use(passport.initialize());
