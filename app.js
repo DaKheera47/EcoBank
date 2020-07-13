@@ -28,7 +28,7 @@ app.use( bodyParser.urlencoded({ extended: true }) );
 app.set("view engine", "ejs");
 app.use(flash());
 app.use(session({ secret: SESSION_SECRET, store: new MongoStore({
-    url: "mongodb://localhost/bankAppV3",
+    url: MONGO_SECRET,
     useNewUrlParser: true,
     useUnifiedTopology: true
 }), saveUninitialized: false, resave: false
