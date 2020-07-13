@@ -1,5 +1,4 @@
 // Imported modules
-// if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 const express = require('express');
 const app = express();
 const passport = require('passport');
@@ -11,7 +10,6 @@ const MongoStore = require('connect-mongo')(session);
 const PORT = process.env.PORT || 1001;
 const MONGO_SECRET = process.env.MONGO_SECRET;
 const SESSION_SECRET = process.env.SESSION_SECRET;
-const LOCAL_MONGO_URL = process.env.LOCAL_MONGO_URL;
 
 // Self made imports
 const auth = require("./middleware");
