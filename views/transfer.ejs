@@ -15,7 +15,7 @@
     <!-- FOR LARGER SCREENS -->
     <nav class="green darken-2 sidenav-trigger show-on-med-and-up hide-on-small-and-down" role="navigation">
         <div class="nav-wrapper container">
-            <a id="logo-container" href="/" class="brand-logo">EcoBank</a>
+            <a id="logo-container" href="/" class="brand-logo left">EcoBank</a>
             <ul class="right">
                 <% if ( typeof user != "undefined" ) { %>
                 <li><a href="/bank">Dashboard</a></li>
@@ -25,7 +25,7 @@
         </div>
     </nav>
     <!-- FOR SMALLER SCREENS -->
-    <nav class="green darken-2 sidenav-trigger show-on-med-and-down hide-on-med-and-up" role="navigation">
+    <nav class="green darken-2 sidenav-trigger show-on-small-and-down hide-on-med-and-up" role="navigation">
         <div class="nav-wrapper container">
             <a id="logo-container" href="/" class="brand-logo left">EcoBank</a>
             <ul class="right">
@@ -38,7 +38,7 @@
     </nav>
 
     <div class="container">
-        <div class="hide-on-med-and-down show-on-med-and-up">
+        <div class="hide-on-med-and-down show-on-large-only">
             <!-- FOR BIGGER SCREENS -->
             <div class="row">
                 <div class="col s12 m8">
@@ -65,18 +65,16 @@
                             <% } %>
                             <br><br>
                             <h6>Your Account No: <input class="center-align white-text" onclick="this.select();" type="text" value=<%= user._id %> readOnly></h6>
-                            
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         
-        <div class="show-on-med-and-down hide-on-med-and-up">
+        <div class="show-on-med-and-down hide-on-large-only">
             <!-- FOR SMALLER SCREENS -->
             <div class="row">
-                <div class="col s12 m8">
+                <div class="col s12 m12">
                     <h3 class="green-text center">Enter the Account Number</h3>
                     <form action="/user/transfer" method="post">
                         <div class="input-field">
@@ -93,7 +91,7 @@
                         <br>    
                     </form>
                 </div>
-                <div class="col s12 m4">
+                <div class="col s12 m12">
                     <div class="card small green darken-3">
                         <div class="card-content white-text center">
                             <span class="card-title">Your Current Balance</span>
